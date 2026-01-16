@@ -1,0 +1,50 @@
+<div id="particles" aria-hidden="true"></div>
+
+<script is:inline>
+  // Respect reduced motion
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    // do nothing
+  } else {
+    // Lazy-load particles only on this page
+    import("https://cdn.jsdelivr.net/npm/@tsparticles/engine@3/+esm").then(async ({ tsParticles }) => {
+      const { loadSlim } = await import("https://cdn.jsdelivr.net/npm/@tsparticles/slim@3/+esm");
+      await loadSlim(tsParticles);
+
+      await tsParticles.load({
+        id: "particles",
+        options: {
+          fullScreen: { enable: false },
+          background: { color: { value: "transparent" } },
+          fpsLimit: 60,
+          particles: {
+            number: { value: 85, density: { enable: true, area: 900 } },
+            color: { value: "#ffffff" },
+            opacity: { value: 0.35 },
+            size: { value: { min: 1, max: 3 } },
+            move: { enable: true, speed: 0.6, outModes: "out" },
+            links: { enable: true, distance: 140, opacity: 0.25, width: 1 },
+          },
+         detectRetina: true,
+        },
+      });
+    });
+  }
+</script>
+
+<style>
+
+  #particles {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  #particles canvas {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 0 !important;
+  }
+
+</style>
+

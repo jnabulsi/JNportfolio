@@ -1,0 +1,63 @@
+---
+const links = [
+  { href: "/about", label: "ABOUT ME" },
+  { href: "/work", label: "WORK" },
+  { href: "/contact", label: "CONTACT" },
+];
+const name = "Jordan Nabulsi";
+---
+<header>
+  <div class="container inner">
+    <a class="brand" href="/">{name}</a>
+
+    <nav class="nav">
+      {links.map((l) => (
+        <a class="navlink" href={l.href}>{l.label}</a>
+      ))}
+    </nav>
+  </div>
+
+  <style>
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(11, 13, 16, 0.6);
+      border-bottom: 1px solid var(--border);
+      z-index: 10;
+    }
+
+    .inner {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+
+    .brand {
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: 0.3px;
+    }
+
+    @media (min-width: 768px) {
+      .brand {
+        font-size: 1.25rem;
+      }
+    }
+
+    .nav {
+      display: flex;
+      gap: 1.25rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .navlink:hover {
+      color: var(--fg);
+      text-decoration: none;
+    }
+  </style>
+</header>
+
