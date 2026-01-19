@@ -1,5 +1,9 @@
 ---
-const { title = "Jordan Nabulsi", description = "Portfolio site" } = Astro.props;
+const {
+  title = "Jordan Nabulsi",
+  description = "Portfolio site",
+  showFooter = true,
+} = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
@@ -53,7 +57,7 @@ const { title = "Jordan Nabulsi", description = "Portfolio site" } = Astro.props
       }
 
 
-      main { min-height: calc(100vh - 72px); } /* header height-ish */
+      main { min-height: calc(100vh - 72px); }
       footer {
         padding: 2rem 0;
         color: var(--muted);
@@ -74,11 +78,13 @@ const { title = "Jordan Nabulsi", description = "Portfolio site" } = Astro.props
     <main>
       <slot />
     </main>
+    {showFooter && (
     <footer>
       <div class="container">
         <small>© {new Date().getFullYear()} Jordan Nabulsi</small>
       </div>
     </footer>
+    )}
   </body>
 </html>
 

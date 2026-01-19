@@ -4,7 +4,8 @@ import Header from "../components/Header.astro";
 import ParticlesBg from "../components/ParticlesBg.astro";
 ---
 
-<BaseLayout title="Jordan Nabulsi — Portfolio">
+<BaseLayout title="Jordan Nabulsi — Portfolio" showFooter={false}>
+
   <Header slot="header" />
 
   <section class="hero">
@@ -38,9 +39,9 @@ import ParticlesBg from "../components/ParticlesBg.astro";
   </section>
 
 <style is:global>
-  .hero {
+    .hero {
       position: relative;
-      min-height: 100vh;
+      min-height: calc(100vh - 72px);
       display: grid;
       place-items: center;
       overflow: hidden;
@@ -51,7 +52,7 @@ import ParticlesBg from "../components/ParticlesBg.astro";
       z-index: 1;
       text-align: center;
       padding: 1rem 1rem 6rem;
-    }
+}
 
 
     .avatar-frame {
@@ -68,17 +69,9 @@ import ParticlesBg from "../components/ParticlesBg.astro";
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: scale(1.55);
+      transform: scale(1.95);
       transform-origin: center 35%;
-      display: block;
-    }
-
-
-    .hero h1 {
-      margin: 0.25rem 0 0;
-      font-size: clamp(2rem, 4vw, 3rem);
-      letter-spacing: -0.02em;
-    }
+      display: block; }
 
     .subtitle {
       margin: 0.5rem 0 1.25rem;

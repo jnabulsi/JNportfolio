@@ -1,0 +1,232 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+---
+
+<BaseLayout title="About — Jordan Nabulsi">
+  <Header slot="header" />
+
+  <section class="page">
+    <div class="container content">
+      <header class="page-header">
+        <h1>About Me</h1>
+        <p class="status">Open to full-time junior roles (Melbourne / remote)</p>
+      </header>
+
+      <div class="layout">
+        <div class="story">
+          <p class="lede">
+            I’m a final-year Computer Science student based in Melbourne, with a background as a licensed industrial
+            electrician. I started programming around the same time I began my electrical apprenticeship, and over the past
+            decade I’ve built up my skills while working on industrial control and automation equipment.
+          </p>
+
+          <p>
+            That experience has shaped how I approach software. I value practical design, understanding systems end-to-end,
+            and building things that are reliable, maintainable, and fit for purpose.
+          </p>
+
+          <p>
+            I’m a daily Linux user with a strong interest in open source software and modern development tooling. Alongside
+            my studies, I’ve built personal projects ranging from full-stack applications to smaller tools, as well as
+            websites and internal tools for friends and workplaces.
+          </p>
+        </div>
+
+        <aside class="side">
+          <h2>Toolbox</h2>
+
+          <div class="toolbox">
+            <div class="tool-group">
+              <div class="tool-label">Frontend</div>
+              <div class="chips">
+                <span class="chip">JavaScript</span>
+                <span class="chip">Vue</span>
+                <span class="chip">React</span>
+                <span class="chip">State Management</span>
+              </div>
+            </div>
+
+            <div class="tool-group">
+              <div class="tool-label">Backend</div>
+              <div class="chips">
+                <span class="chip">Python</span>
+                <span class="chip">FastAPI</span>
+                <span class="chip">REST APIs</span>
+                <span class="chip">PostgreSQL</span>
+              </div>
+            </div>
+
+            <div class="tool-group">
+              <div class="tool-label">Dev & Platform</div>
+              <div class="chips">
+                <span class="chip">Linux</span>
+                <span class="chip">Git</span>
+                <span class="chip">Docker</span>
+                <span class="chip">AWS</span>
+                <span class="chip">CI/CD</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn" href="/work">View my work →</a>
+        <a class="btn btn-ghost" href="/contact">Get in touch →</a>
+      </div>
+    </div>
+  </section>
+
+  <style is:global>
+    .page {
+      padding: 3.5rem 0 2.2rem;
+    }
+
+    .content {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .page-header {
+      margin-bottom: 1.75rem;
+      text-align: left;
+    }
+
+    .page-header h1 {
+      margin: 0 0 0.5rem;
+      font-size: clamp(2rem, 3.2vw, 2.6rem);
+      letter-spacing: -0.02em;
+    }
+
+    .status {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      letter-spacing: 0.2px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    @media (min-width: 900px) {
+      .layout {
+        grid-template-columns: 1.6fr 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    .lede {
+      margin: 0 0 1.25rem;
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.85;
+    }
+
+    .story p {
+      margin: 0 0 1.1rem;
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 1rem;
+    }
+
+    .side {
+      padding: 1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .side h2 {
+      margin: 0 0 1rem;
+      font-size: 1.05rem;
+      letter-spacing: 0.2px;
+      color: var(--fg);
+    }
+
+    .toolbox {
+      display: grid;
+      gap: 1.1rem;
+    }
+
+    .tool-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .chip {
+      padding: 0.35rem 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+      justify-content: center;
+    }
+
+    @media (min-width: 900px) {
+      .cta-row {
+        justify-content: flex-start;
+      }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--fg);
+      text-decoration: none;
+      transition: transform 160ms ease, background 160ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+      color: var(--fg);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .btn {
+        transition: none;
+      }
+      .btn:hover {
+        transform: none;
+      }
+    }
+  </style>
+</BaseLayout>
+
