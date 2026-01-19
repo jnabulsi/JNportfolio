@@ -1,0 +1,118 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import { getCollection } from "astro:content";
+
+const projects = await getCollection("projects");
+// Optional: newest first if you add dates later
+// projects.sort((a, b) => (b.data.date ?? "").localeCompare(a.data.date ?? ""));
+---
+
+<BaseLayout title="Work — Jordan Nabulsi">
+  <Header slot="header" />
+
+  <section class="page">
+    <div class="container content">
+      <header class="page-header">
+        <h1>Work</h1>
+        <p class="lede">
+          A selection of projects I’ve built. Each one includes a short write-up and screenshots.
+        </p>
+      </header>
+
+      <div class="grid">
+        {projects.map((p) => (
+          <a class="card" href={`/work/${p.slug}`}>
+            {p.data.screenshots?.[0] && (
+              <img class="thumb" src={p.data.screenshots[0]} alt={`${p.data.title} screenshot`} loading="lazy" />
+            )}
+
+            <div class="card-body">
+              <div class="card-title">{p.data.title}</div>
+              <div class="card-desc">{p.data.description}</div>
+
+              <div class="chips">
+                {p.data.stack.slice(0, 5).map((s) => (
+                  <span class="chip">{s}</span>
+                ))}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <style is:global>
+    .page { padding: 3.5rem 0 4rem; }
+    .content { max-width: 980px; margin: 0 auto; }
+
+    .page-header { margin-bottom: 2rem; text-align: left; }
+    .page-header h1 {
+      margin: 0 0 0.75rem;
+      font-size: clamp(2rem, 3.2vw, 2.6rem);
+      letter-spacing: -0.02em;
+    }
+    .lede {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 70ch;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1.25rem;
+      grid-template-columns: 1fr;
+      margin-top: 2rem;
+    }
+    @media (min-width: 800px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .card {
+      display: block;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      text-decoration: none;
+      transition: transform 160ms ease, background 160ms ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .thumb {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-body { padding: 1rem 1.1rem 1.1rem; }
+    .card-title { font-size: 1.05rem; color: var(--fg); margin-bottom: 0.35rem; }
+    .card-desc { color: var(--muted); line-height: 1.6; margin-bottom: 0.8rem; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .chip {
+      padding: 0.3rem 0.55rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card { transition: none; }
+      .card:hover { transform: none; }
+    }
+  </style>
+</BaseLayout>
+

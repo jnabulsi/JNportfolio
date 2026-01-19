@@ -1,0 +1,141 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((p) => ({
+    params: { slug: p.slug },
+    props: { project: p },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<BaseLayout title={`${project.data.title} — Work`}>
+  <Header slot="header" />
+
+  <section class="page">
+    <div class="container content">
+      <a class="back" href="/work">← Back to work</a>
+
+      <header class="header">
+        <h1>{project.data.title}</h1>
+        <p class="desc">{project.data.description}</p>
+
+        <div class="meta">
+          <div class="chips">
+            {project.data.stack.map((s) => (
+              <span class="chip">{s}</span>
+            ))}
+          </div>
+
+          <div class="links">
+            {project.data.links?.live && <a href={project.data.links.live} target="_blank" rel="noopener">Live</a>}
+            {project.data.links?.github && <a href={project.data.links.github} target="_blank" rel="noopener">GitHub</a>}
+          </div>
+        </div>
+      </header>
+
+      {project.data.screenshots.length > 0 && (
+        <div class="gallery">
+          {project.data.screenshots.map((src) => (
+            <img class="shot" src={src} alt={`${project.data.title} screenshot`} loading="lazy" />
+          ))}
+        </div>
+      )}
+
+      <article class="body">
+        <Content />
+      </article>
+    </div>
+  </section>
+
+  <style is:global>
+    .page { padding: 3.5rem 0 4rem; }
+    .content { max-width: 980px; margin: 0 auto; }
+
+    .back { color: var(--muted); text-decoration: none; }
+    .back:hover { text-decoration: underline; }
+
+    .header { margin-top: 1.25rem; }
+    .header h1 {
+      margin: 0 0 0.75rem;
+      font-size: clamp(2rem, 3.2vw, 2.8rem);
+      letter-spacing: -0.02em;
+    }
+    .desc { margin: 0 0 1.25rem; color: var(--muted); line-height: 1.8; max-width: 75ch; }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .chip {
+      padding: 0.3rem 0.55rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
+    .links { display: flex; gap: 0.9rem; }
+    .links a { color: var(--fg); text-decoration: none; }
+    .links a:hover { text-decoration: underline; }
+
+    .gallery {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr;
+      margin-bottom: 2rem;
+    }
+    @media (min-width: 800px) {
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .shot {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--card);
+    }
+
+    /* Mobile: show the whole screenshot */
+    @media (max-width: 799px) {
+      .shot {
+        height: auto;
+        object-fit: contain;
+      }
+    }
+
+
+    .body {
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 75ch;
+    }
+    .body :global(h2) {
+      margin: 2rem 0 0.75rem;
+      color: var(--fg);
+      font-size: 1.05rem;
+    }
+    .body :global(ul) { padding-left: 1.2rem; }
+</style>
+  </BaseLayout>
+
