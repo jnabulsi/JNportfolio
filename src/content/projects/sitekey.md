@@ -12,7 +12,9 @@ stack:
 links:
   github: "https://github.com/jnabulsi/SiteKey"
   live: "https://site-key.vercel.app/"
-screenshots: []
+screenshots:
+  - "/projects/sitekey/20260224_16h40m23s_grim.png"
+  - "/projects/sitekey/20260224_16h40m51s_grim.png"
 featured: true
 role: "Solo project"
 ---
